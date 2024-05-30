@@ -1,43 +1,34 @@
-import {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import AiService from "./services/AiService.ts";
+import SingleSelectList from "./components/SingleSelectList.tsx";
 
 type AppProps = {
   title: string;
 };
 
 const App = ({title}: AppProps) => {
-  const [activities, setActivities] = useState<Array<string>>([]);
-
-  const retrieveActivities = () => {
-    console.log("### Loading activities")
-    AiService.getActivities()
-    .then((response: any) => {
-      setActivities(response.data);
-      console.log(response.data);
-    })
-    .catch((e: Error) => {
-      console.log(e);
-    });
-  };
-  useEffect(() => {
-    retrieveActivities();
-  }, []);
+  const [activity, setActivity] = useState<string>([]);
+  const [color, setColor] = useState<string>([]);
+  const [environment, setEnvironment] = useState<string>([]);
+  const [food, setFood] = useState<string>([]);
+  const [instrument, setInstrument] = useState<string>([]);
 
   return (
-      <div>
-        <h1>{title}</h1>
-        <ul>
-          {activities.map((value, index) => {
-            return (
-                <li key={index}>
-                  <div>
-                    {value}
-                  </div>
-                </li>
-            );
-          })}
-        </ul>
-      </div>
+      <>
+        <div>
+          <h1>{title}</h1>
+        </div>
+        <SingleSelectList description={"Select an activity"} getValues={AiService.getActivities}
+                          setValue={setActivity}></SingleSelectList>
+        <SingleSelectList description={"Select a color"} getValues={AiService.getColors}
+                          setValue={setColor}></SingleSelectList>
+        <SingleSelectList description={"Select an environment"} getValues={AiService.getEnvironments}
+                          setValue={setEnvironment}></SingleSelectList>
+        <SingleSelectList description={"Select a food"} getValues={AiService.getFoods}
+                          setValue={setFood}></SingleSelectList>
+        <SingleSelectList description={"Select an instrument"} getValues={AiService.getInstruments}
+                          setValue={setInstrument}></SingleSelectList>
+      </>
   );
 };
 
