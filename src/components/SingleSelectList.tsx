@@ -1,14 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {Autocomplete, Stack, TextField} from "@mui/material";
+import {useEffect, useState} from "react";
+import {Autocomplete, CircularProgress, Stack, TextField} from "@mui/material";
 import {AxiosResponse} from "axios";
 
 type ListInputProps = {
   description: string;
   getValues: () => Promise<AxiosResponse<String[]>>;
   setValue: (value: string) => void
+  value: string;
 };
 
-const SingleSelectList = ({description, getValues, setValue}: ListInputProps) => {
+const SingleSelectList = ({description, getValues, setValue, value}: ListInputProps) => {
   const [values, setValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
@@ -16,6 +17,7 @@ const SingleSelectList = ({description, getValues, setValue}: ListInputProps) =>
     getValues()
     .then((response: any) => {
       setValues(response.data);
+      setValue(response.data[0]);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -32,17 +34,18 @@ const SingleSelectList = ({description, getValues, setValue}: ListInputProps) =>
 
   return (
       <Stack spacing={1} sx={{ width: 300 }}>
-        <Autocomplete
+        {values.length > 0 ? <Autocomplete
             {...defaultProps}
             id="auto-highlight"
             autoHighlight
             onChange={(event, newValue: string) => {
               setValue(newValue);
             }}
+            value={value}
             renderInput={(params) => (
                 <TextField {...params} label={description} variant="standard" />
             )}
-        />
+        /> : <CircularProgress />}
       </Stack>
   );
 }
