@@ -18,8 +18,15 @@ const getCharacteristics = () => {
   return http.get<Array<String>>("/dog/characteristics");
 };
 
-const getDetails = () => {
-  return http.get<BreedInfo>("/dog/details");
+const getDetails = (breed: string, characteristics: Array<string>) => {
+  return http.get<BreedInfo>("/dog/details",
+      {
+        params: {
+          breed: breed,
+          characteristics: characteristics.join(","),
+        },
+      }
+  );
 };
 
 const AiDogService = {

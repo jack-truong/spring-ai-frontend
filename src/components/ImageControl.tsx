@@ -1,8 +1,8 @@
 import {useState} from "react";
 import SingleSelect from "./SingleSelect.tsx";
 import AiChatService from "../services/AiChatService.ts";
-import {Stack} from "@mui/material";
 import {BsCardImage} from "react-icons/bs";
+import ControlStack from "./ControlStack.tsx";
 
 const ImageControl = () => {
   const [activity, setActivity] = useState<string>("");
@@ -12,7 +12,7 @@ const ImageControl = () => {
   const [instrument, setInstrument] = useState<string>("");
 
   return (
-      <Stack sx={{ border: 3, padding: 2 }} spacing={5}>
+      <ControlStack>
         <h2>{"AI Image Generation\t"}<BsCardImage/></h2>
         <SingleSelect description={"Select an activity"} getValues={AiChatService.getActivities}
                       setValue={setActivity} value={activity}></SingleSelect>
@@ -26,7 +26,7 @@ const ImageControl = () => {
         <SingleSelect description={"Select an instrument"}
                       getValues={AiChatService.getInstruments}
                       setValue={setInstrument} value={instrument}></SingleSelect>
-      </Stack>
+      </ControlStack>
   )
 }
 
