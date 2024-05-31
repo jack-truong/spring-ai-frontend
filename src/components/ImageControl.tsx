@@ -15,17 +15,17 @@ const ImageControl = () => {
       <ControlStack>
         <h2>{"AI Image Generation\t"}<BsCardImage/></h2>
         <SingleSelect description={"Select an activity"} getValues={AiChatService.getActivities}
-                      setValue={setActivity} value={activity}></SingleSelect>
+                      selectRandom={true} setValue={setActivity} value={activity}></SingleSelect>
         <SingleSelect description={"Select a color"} getValues={AiChatService.getColors}
-                      setValue={setColor} value={color}></SingleSelect>
+                      selectRandom={true} setValue={setColor} value={color}></SingleSelect>
         <SingleSelect description={"Select an environment"}
                       getValues={AiChatService.getEnvironments}
-                      setValue={setEnvironment} value={environment}></SingleSelect>
+                      selectRandom={true} setValue={setEnvironment} value={environment}></SingleSelect>
         <SingleSelect description={"Select a food"} getValues={AiChatService.getFoods}
-                      setValue={setFood} value={food}></SingleSelect>
+                      selectRandom={true} setValue={setFood} value={food}></SingleSelect>
         <SingleSelect description={"Select an instrument"}
                       getValues={AiChatService.getInstruments}
-                      setValue={setInstrument} value={instrument}></SingleSelect>
+                      selectRandom={true} setValue={setInstrument} value={instrument}></SingleSelect>
       </ControlStack>
   )
 }

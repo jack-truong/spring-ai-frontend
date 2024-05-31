@@ -31,7 +31,7 @@ const DogInfoControl = () => {
           <Box flex={1}>
             <ControlStack sx={{border: 0}}>
               <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
-                            setValue={setBreed} value={breed}></SingleSelect>
+                            selectRandom={true} setValue={setBreed} value={breed}></SingleSelect>
               <MultipleSelect description={"Select dog characteristics"}
                               getValues={AiDogService.getCharacteristics}
                               setValues={setCharacteristics}
