@@ -1,13 +1,10 @@
 import {useState} from "react";
-import SingleSelectList from "./SingleSelectList.tsx";
-import AiService from "../services/AiService.ts";
+import SingleSelect from "./SingleSelect.tsx";
+import AiChatService from "../services/AiChatService.ts";
 import {Box} from "@mui/material";
+import {BsCardImage} from "react-icons/bs";
 
-type ImageControlProps = {
-  breed: string;
-};
-
-const ImageControl = ({breed}: ImageControlProps) => {
+const ImageControl = () => {
   const [activity, setActivity] = useState<string>("");
   const [color, setColor] = useState<string>("");
   const [environment, setEnvironment] = useState<string>("");
@@ -15,19 +12,20 @@ const ImageControl = ({breed}: ImageControlProps) => {
   const [instrument, setInstrument] = useState<string>("");
 
   return (
-      <Box sx={{ border: 3, padding: 2 }}>
-        <h2>{"AI Image Generation"}</h2>
-        <div>{`Selected breed: ${breed}`}</div>
-        <SingleSelectList description={"Select an activity"} getValues={AiService.getActivities}
-                          setValue={setActivity} value={activity} ></SingleSelectList>
-        <SingleSelectList description={"Select a color"} getValues={AiService.getColors}
-                          setValue={setColor} value={color} ></SingleSelectList>
-        <SingleSelectList description={"Select an environment"} getValues={AiService.getEnvironments}
-                          setValue={setEnvironment} value={environment} ></SingleSelectList>
-        <SingleSelectList description={"Select a food"} getValues={AiService.getFoods}
-                          setValue={setFood} value={food} ></SingleSelectList>
-        <SingleSelectList description={"Select an instrument"} getValues={AiService.getInstruments}
-                          setValue={setInstrument} value={instrument} ></SingleSelectList>
+      <Box sx={{border: 3, padding: 2}}>
+        <h2>{"AI Image Generation\t"}<BsCardImage/></h2>
+        <SingleSelect description={"Select an activity"} getValues={AiChatService.getActivities}
+                      setValue={setActivity} value={activity}></SingleSelect>
+        <SingleSelect description={"Select a color"} getValues={AiChatService.getColors}
+                      setValue={setColor} value={color}></SingleSelect>
+        <SingleSelect description={"Select an environment"}
+                      getValues={AiChatService.getEnvironments}
+                      setValue={setEnvironment} value={environment}></SingleSelect>
+        <SingleSelect description={"Select a food"} getValues={AiChatService.getFoods}
+                      setValue={setFood} value={food}></SingleSelect>
+        <SingleSelect description={"Select an instrument"}
+                      getValues={AiChatService.getInstruments}
+                      setValue={setInstrument} value={instrument}></SingleSelect>
       </Box>
   )
 }

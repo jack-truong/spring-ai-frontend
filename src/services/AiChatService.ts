@@ -20,7 +20,7 @@ const getInstruments = () => {
   return http.get<Array<String>>("/instruments");
 };
 
-const AiService = {
+const AiChatService = {
   getActivities: getActivities,
   getColors: getColors,
   getEnvironments: getEnvironments,
@@ -28,4 +28,4 @@ const AiService = {
   getInstruments: getInstruments,
 };
 
-export default AiService;
+export default AiChatService;

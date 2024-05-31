@@ -5,19 +5,20 @@ import {AxiosResponse} from "axios";
 type ListInputProps = {
   description: string;
   getValues: () => Promise<AxiosResponse<String[]>>;
-  setValue: (value: string) => void
-  value: string;
+  setValues: (value: Array<string>) => void
+  values: Array<string>;
 };
 
-const SingleSelectList = ({description, getValues, setValue, value}: ListInputProps) => {
-  const [values, setValues] = useState<Array<string>>([]);
+const MultipleSelect = ({description, getValues, setValues, values}: ListInputProps) => {
+  const [localValues, setLocalValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
-    console.log("### Loading values")
+    console.log(`### Loading values: ${description}`);
+
     getValues()
     .then((response: any) => {
+      setLocalValues(response.data);
       setValues(response.data);
-      setValue(response.data[0]);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -28,26 +29,27 @@ const SingleSelectList = ({description, getValues, setValue, value}: ListInputPr
   }, []);
 
   const defaultProps = {
-    options: values,
-    getOptionLabel: (option : string) => option,
+    options: localValues,
+    getOptionLabel: (option: string) => option,
   };
 
   return (
-      <Stack spacing={1} sx={{ width: 300 }}>
+      <Stack spacing={1} sx={{width: 300}}>
         {values.length > 0 ? <Autocomplete
             {...defaultProps}
+            multiple
             id="auto-highlight"
             autoHighlight
-            onChange={(event, newValue: string) => {
-              setValue(newValue);
+            onChange={(event, newValue: Array<string>) => {
+              setValues(newValue);
             }}
-            value={value}
+            value={values}
             renderInput={(params) => (
-                <TextField {...params} label={description} variant="standard" />
+                <TextField {...params} label={description} variant="standard"/>
             )}
-        /> : <CircularProgress />}
+        /> : <CircularProgress/>}
       </Stack>
   );
 }
 
-export default SingleSelectList;
+export default MultipleSelect;

@@ -5,7 +5,7 @@ type HeaderProps = {
 };
 
 const Header = ({title}: HeaderProps) => {
-  return <h1>{title}<GiRobotHelmet/> </h1>
+  return <h1>{`${title}\t`}<GiRobotHelmet/> </h1>
 }
 
 export default Header;
