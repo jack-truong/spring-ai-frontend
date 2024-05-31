@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import {Autocomplete, CircularProgress, Stack, TextField} from "@mui/material";
 import {AxiosResponse} from "axios";
+import SelectTextField from "./SelectTextField.tsx";
 
 type ListInputProps = {
   description: string;
@@ -44,7 +45,7 @@ const SingleSelect = ({description, getValues, setValue, value}: ListInputProps)
             }}
             value={value}
             renderInput={(params) => (
-                <TextField {...params} label={description} variant="standard"/>
+                <SelectTextField params={params} label={description}/>
             )}
         /> : <CircularProgress/>}
       </Stack>
