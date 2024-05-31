@@ -6,11 +6,11 @@ type ControlStackProps = {
   sx?: SxProps<Theme>;
 }
 
-const ControlStack = ({sx, children} : ControlStackProps) => {
+const ComponentStack = ({sx, children} : ControlStackProps) => {
   return <Stack sx={[
-      { border: 3, padding: 2 },
+      { padding: 2 },
       ...(Array.isArray(sx) ? sx : [sx]),
   ]} spacing={5}>{children}</Stack>
 }
 
-export default ControlStack;
+export default ComponentStack;
