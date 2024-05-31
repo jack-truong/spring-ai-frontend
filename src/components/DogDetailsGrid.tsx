@@ -1,4 +1,3 @@
-import { GiRobotHelmet } from "react-icons/gi";
 import {BreedInfo} from "../services/AiDogService.ts";
 import {DataGrid} from "@mui/x-data-grid";
 import {CircularProgress} from "@mui/material";
@@ -16,12 +15,14 @@ const DogDetailsGrid = ({breedInfo}: DogDetailsGridProps) => {
     {
       field: "name",
       flex: 1,
-      headerName: "Characteristic"
+      headerName: "Characteristic",
+      headerClassName: "styledHeader"
     },
     {
       field: "value",
       flex: 5,
-      headerName: "Value"
+      headerName: "Value",
+      headerClassName: "styledHeader"
     }
   ]
 
@@ -37,6 +38,8 @@ const DogDetailsGrid = ({breedInfo}: DogDetailsGridProps) => {
       columns={columns}
       hideFooter
       rowSelection={false}
+      showColumnVerticalBorder
+      showCellVerticalBorder
   />
 }
 

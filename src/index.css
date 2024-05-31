@@ -13,3 +13,7 @@
 h1 {
   text-align: center;
 }
+
+.styledHeader {
+  background: rgb(205, 220, 57);
+}

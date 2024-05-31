@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Autocomplete, CircularProgress, Stack, TextField} from "@mui/material";
+import {Autocomplete, CircularProgress, Stack} from "@mui/material";
 import {AxiosResponse} from "axios";
 import SelectTextField from "./SelectTextField.tsx";
 
@@ -8,9 +8,14 @@ type ListInputProps = {
   getValues: () => Promise<AxiosResponse<String[]>>;
   setValue: (value: string) => void
   value: string;
+  selectRandom? : boolean
 };
 
-const SingleSelect = ({description, getValues, setValue, value}: ListInputProps) => {
+const getRandomElement = (arr: any[]) => {
+  return arr.length ? arr[Math.floor(Math.random() * arr.length)] : undefined
+}
+
+const SingleSelect = ({description, getValues, setValue, value, selectRandom}: ListInputProps) => {
   const [values, setValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
@@ -19,7 +24,7 @@ const SingleSelect = ({description, getValues, setValue, value}: ListInputProps)
     getValues()
     .then((response: any) => {
       setValues(response.data);
-      setValue(response.data[0]);
+      setValue(selectRandom ? getRandomElement(response.data) : response.data[0]);
     })
     .catch((e: Error) => {
       console.log(e);
