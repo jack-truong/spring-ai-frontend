@@ -9,6 +9,7 @@ import DogDetailsGrid from "./DogDetailsGrid.tsx";
 import {isArrayEmpty, isEmpty} from "../functions/functions.ts";
 
 const DogInfoControl = () => {
+  const [randomize, setRandomize] = useState(0);
   const [breed, setBreed] = useState<string>("");
   const [characteristics, setCharacteristics] = useState<Array<string>>([]);
   const [details, setDetails] = useState<BreedInfo>();
@@ -35,16 +36,24 @@ const DogInfoControl = () => {
           <Box flex={1}>
             <ComponentStack>
               <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
-                            selectRandom={true} setValue={setBreed} value={breed}></SingleSelect>
+                            selectRandom={true} setValue={setBreed} value={breed}
+                            randomize={randomize}></SingleSelect>
               <MultipleSelect description={"Select dog characteristics"}
                               getValues={AiDogService.getCharacteristics}
                               setValues={setCharacteristics}
                               values={characteristics}></MultipleSelect>
-              <Button sx={{width: 200, textAlign: 'left'}}
-                      variant="contained"
-                      onClick={getDetails}
-                      disabled={!enabled}
-              >Generate</Button>
+              <Box>
+                <Button sx={{width: 100, textAlign: 'left', marginRight: 2}}
+                        variant="contained"
+                        onClick={getDetails}
+                        disabled={!enabled}
+                >Generate</Button>
+                <Button sx={{width: 100, textAlign: 'left'}}
+                        variant="contained"
+                        onClick={() => setRandomize(prev => prev + 1)}
+                        disabled={!enabled}
+                >Randomize</Button>
+              </Box>
             </ComponentStack>
           </Box>
           <Box flex={3}>

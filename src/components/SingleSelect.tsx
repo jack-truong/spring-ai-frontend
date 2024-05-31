@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {Autocomplete, CircularProgress, Stack} from "@mui/material";
 import {AxiosResponse} from "axios";
 import SelectTextField from "./SelectTextField.tsx";
+import {isArrayEmpty} from "../functions/functions.ts";
 
 type ListInputProps = {
   description: string;
@@ -9,13 +10,14 @@ type ListInputProps = {
   setValue: (value: string) => void
   value: string;
   selectRandom? : boolean
+  randomize?: number
 };
 
 const getRandomElement = (arr: any[]) => {
   return arr.length ? arr[Math.floor(Math.random() * arr.length)] : undefined
 }
 
-const SingleSelect = ({description, getValues, setValue, value, selectRandom}: ListInputProps) => {
+const SingleSelect = ({description, getValues, setValue, value, selectRandom, randomize}: ListInputProps) => {
   const [values, setValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
@@ -33,6 +35,11 @@ const SingleSelect = ({description, getValues, setValue, value, selectRandom}: L
   useEffect(() => {
     retrieveValues();
   }, []);
+  useEffect(() => {
+    if (!isArrayEmpty(values)) {
+      setValue(getRandomElement(values));
+    }
+  }, [randomize]);
 
   const defaultProps = {
     options: values,
