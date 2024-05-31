@@ -4,7 +4,8 @@ import AiDogService, {BreedInfo} from "../services/AiDogService.ts";
 import {GiSittingDog} from "react-icons/gi";
 import MultipleSelect from "./MultipleSelect.tsx";
 import ControlStack from "./ControlStack.tsx";
-import {Button} from "@mui/material";
+import {Box, Button} from "@mui/material";
+import DogDetailsGrid from "./DogDetailsGrid.tsx";
 
 const DogInfoControl = () => {
   const [breed, setBreed] = useState<string>("");
@@ -26,9 +27,16 @@ const DogInfoControl = () => {
         <h2>{"AI Dog Info Generation\t"}<GiSittingDog/></h2>
         <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
                       setValue={setBreed} value={breed} ></SingleSelect>
+        <Box sx={{display: "flex"}}>
+          <Box flex={1}>
+            <MultipleSelect description={"Select dog characteristics"} getValues={AiDogService.getCharacteristics}
+                            setValues={setCharacteristics} values={characteristics} ></MultipleSelect>
+          </Box>
+          <Box flex={3}>
+            <DogDetailsGrid breedInfo={details}/>
+          </Box>
 
-        <MultipleSelect description={"Select dog characteristics"} getValues={AiDogService.getCharacteristics}
-                      setValues={setCharacteristics} values={characteristics} ></MultipleSelect>
+        </Box>
         <Button sx={{width: 200, textAlign: 'left'}} variant="contained" onClick={getDetails}>Generate</Button>
       </ControlStack>
   )
