@@ -9,6 +9,7 @@ import ImagePanel from "./ImagePanel.tsx";
 import {isEmpty} from "../functions/functions.ts";
 
 const ImageControl = () => {
+  const [randomize, setRandomize] = useState(0);
   const [breed, setBreed] = useState<string>("");
   const [activity, setActivity] = useState<string>("");
   const [color, setColor] = useState<string>("");
@@ -18,7 +19,7 @@ const ImageControl = () => {
   const [imagePrompt, setImagePrompt] = useState("");
 
   const enabled: boolean = !isEmpty(breed) && !isEmpty(activity) && !isEmpty(color)
-    && !isEmpty(environment) && !isEmpty(food) && !isEmpty(instrument);
+      && !isEmpty(environment) && !isEmpty(food) && !isEmpty(instrument);
 
   const getImagePrompt = () => {
     AiDogService.getImagePrompt(
@@ -44,28 +45,42 @@ const ImageControl = () => {
           <Box flex={1}>
             <ComponentStack>
               <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
-                            selectRandom={true} setValue={setBreed} value={breed}></SingleSelect>
+                            selectRandom={true} setValue={setBreed} value={breed}
+                            randomize={randomize}>
+              </SingleSelect>
               <SingleSelect description={"Select an activity"}
                             getValues={AiChatService.getActivities}
                             selectRandom={true} setValue={setActivity}
-                            value={activity}></SingleSelect>
+                            value={activity} randomize={randomize}></SingleSelect>
               <SingleSelect description={"Select a color"} getValues={AiChatService.getColors}
-                            setValue={setColor} value={color}></SingleSelect>
+                            setValue={setColor} value={color} randomize={randomize}>
+              </SingleSelect>
               <SingleSelect description={"Select an environment"}
                             getValues={AiChatService.getEnvironments}
                             selectRandom={true} setValue={setEnvironment}
-                            value={environment}></SingleSelect>
+                            value={environment} randomize={randomize}>
+              </SingleSelect>
               <SingleSelect description={"Select a food"} getValues={AiChatService.getFoods}
-                            selectRandom={true} setValue={setFood} value={food}></SingleSelect>
+                            selectRandom={true} setValue={setFood} value={food}
+                            randomize={randomize}>
+              </SingleSelect>
               <SingleSelect description={"Select an instrument"}
                             getValues={AiChatService.getInstruments}
                             selectRandom={true} setValue={setInstrument}
-                            value={instrument}></SingleSelect>
-              <Button sx={{width: 200, textAlign: 'left'}}
-                      variant="contained"
-                      onClick={getImagePrompt}
-                      disabled={!enabled}
-              >Generate</Button>
+                            value={instrument} randomize={randomize}>
+              </SingleSelect>
+              <Box>
+                <Button sx={{width: 100, textAlign: 'left', marginRight: 2}}
+                        variant="contained"
+                        onClick={getImagePrompt}
+                        disabled={!enabled}
+                >Generate</Button>
+                <Button sx={{width: 100, textAlign: 'left'}}
+                        variant="contained"
+                        onClick={() => setRandomize(prev => prev + 1)}
+                        disabled={!enabled}
+                >Randomize</Button>
+              </Box>
             </ComponentStack>
           </Box>
           <Box flex={3}>
