@@ -3,7 +3,7 @@ import SingleSelect from "./SingleSelect.tsx";
 import AiDogService, {BreedInfo} from "../services/AiDogService.ts";
 import {GiSittingDog} from "react-icons/gi";
 import MultipleSelect from "./MultipleSelect.tsx";
-import ControlStack from "./ControlStack.tsx";
+import ComponentStack from "./ComponentStack.tsx";
 import {Box, Button} from "@mui/material";
 import DogDetailsGrid from "./DogDetailsGrid.tsx";
 
@@ -25,26 +25,26 @@ const DogInfoControl = () => {
     });
   }
   return (
-      <ControlStack>
+      <ComponentStack sx={{border: 3}}>
         <h2>{"AI Dog Info Generation\t"}<GiSittingDog/></h2>
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
-            <ControlStack sx={{border: 0}}>
+            <ComponentStack>
               <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
                             selectRandom={true} setValue={setBreed} value={breed}></SingleSelect>
               <MultipleSelect description={"Select dog characteristics"}
                               getValues={AiDogService.getCharacteristics}
                               setValues={setCharacteristics}
                               values={characteristics}></MultipleSelect>
-            </ControlStack>
+            </ComponentStack>
           </Box>
           <Box flex={3}>
-            {showDetails && <DogDetailsGrid breedInfo={details} />}
+            {showDetails && <DogDetailsGrid breedInfo={details}/>}
           </Box>
         </Box>
         <Button sx={{width: 200, textAlign: 'left'}} variant="contained"
                 onClick={getDetails}>Generate</Button>
-      </ControlStack>
+      </ComponentStack>
   )
 }
 
