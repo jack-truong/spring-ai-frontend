@@ -10,7 +10,7 @@ const ComponentStack = ({sx, children} : ControlStackProps) => {
   return <Stack sx={[
       { padding: 2 },
       ...(Array.isArray(sx) ? sx : [sx]),
-  ]} spacing={5}>{children}</Stack>
+  ]} spacing={3}>{children}</Stack>
 }
 
 export default ComponentStack;
