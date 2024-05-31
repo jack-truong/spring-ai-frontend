@@ -4,9 +4,10 @@ import TabsPanel, {TabComponent} from "./components/TabsPanel.tsx";
 import ImageControl from "./components/ImageControl.tsx";
 import {GiSittingDog} from "react-icons/gi";
 import {BsCardImage} from "react-icons/bs";
+import {VscGraphLine} from "react-icons/vsc";
 
 const App = () => {
-  const tabs : Array<TabComponent> = [
+  const tabs: Array<TabComponent> = [
     {
       component: <DogInfoControl/>,
       icon: <GiSittingDog/>,
@@ -16,12 +17,17 @@ const App = () => {
       component: <ImageControl/>,
       icon: <BsCardImage/>,
       label: "AI Dog Image Generation"
+    },
+    {
+      component: <div>Stocks TBD</div>,
+      icon: <VscGraphLine/>,
+      label: "AI Stocks"
     }
   ]
   return (
       <>
         <Header title={"AI Demo"}/>
-        <TabsPanel tabs={tabs} />
+        <TabsPanel tabs={tabs}/>
       </>
   );
 };

@@ -29,10 +29,33 @@ const getDetails = (breed: string, characteristics: Array<string>) => {
   );
 };
 
+const getImagePrompt = (
+    breed: string,
+    activity: string,
+    color : string,
+    environment : string,
+    food : string,
+    instrument : string,
+) => {
+  return http.get<BreedInfo>("/dog/image-prompt",
+      {
+        params: {
+          breed: breed,
+          activity: activity,
+          color: color,
+          environment: environment,
+          food: food,
+          instrument: instrument,
+        },
+      }
+  );
+};
+
 const AiDogService = {
   getBreeds: getBreeds,
   getCharacteristics: getCharacteristics,
-  getDetails: getDetails
+  getDetails: getDetails,
+  getImagePrompt: getImagePrompt
 };
 
 export default AiDogService;
