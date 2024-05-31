@@ -6,6 +6,7 @@ import MultipleSelect from "./MultipleSelect.tsx";
 import ComponentStack from "./ComponentStack.tsx";
 import {Box, Button} from "@mui/material";
 import DogDetailsGrid from "./DogDetailsGrid.tsx";
+import {isArrayEmpty, isEmpty} from "../functions/functions.ts";
 
 const DogInfoControl = () => {
   const [breed, setBreed] = useState<string>("");
@@ -14,6 +15,7 @@ const DogInfoControl = () => {
   const [showDetails, setShowDetails] = useState(false);
 
   const getDetails = () => {
+    console.log(`### Loading dog details ${breed} ${characteristics}`)
     setDetails(undefined);
     setShowDetails(true);
     AiDogService.getDetails(breed, characteristics)
@@ -24,6 +26,7 @@ const DogInfoControl = () => {
       console.log(e);
     });
   }
+  const enabled: boolean = !isEmpty(breed) && !isArrayEmpty(characteristics);
 
   return (
       <ComponentStack sx={{border: 3}}>
@@ -37,14 +40,17 @@ const DogInfoControl = () => {
                               getValues={AiDogService.getCharacteristics}
                               setValues={setCharacteristics}
                               values={characteristics}></MultipleSelect>
+              <Button sx={{width: 200, textAlign: 'left'}}
+                      variant="contained"
+                      onClick={getDetails}
+                      disabled={!enabled}
+              >Generate</Button>
             </ComponentStack>
           </Box>
           <Box flex={3}>
             {showDetails && <DogDetailsGrid breedInfo={details}/>}
           </Box>
         </Box>
-        <Button sx={{width: 200, textAlign: 'left'}} variant="contained"
-                onClick={getDetails}>Generate</Button>
       </ComponentStack>
   )
 }
