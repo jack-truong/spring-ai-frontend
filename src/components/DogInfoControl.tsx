@@ -11,12 +11,14 @@ const DogInfoControl = () => {
   const [breed, setBreed] = useState<string>("");
   const [characteristics, setCharacteristics] = useState<Array<string>>([]);
   const [details, setDetails] = useState<BreedInfo>();
+  const [showDetails, setShowDetails] = useState(false);
 
   const getDetails = () => {
+    setDetails(undefined);
+    setShowDetails(true);
     AiDogService.getDetails(breed, characteristics)
     .then((response: any) => {
       setDetails(response.data);
-      console.log(`### Got details ${JSON.stringify(response.data)}`);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -25,19 +27,23 @@ const DogInfoControl = () => {
   return (
       <ControlStack>
         <h2>{"AI Dog Info Generation\t"}<GiSittingDog/></h2>
-        <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
-                      setValue={setBreed} value={breed} ></SingleSelect>
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
-            <MultipleSelect description={"Select dog characteristics"} getValues={AiDogService.getCharacteristics}
-                            setValues={setCharacteristics} values={characteristics} ></MultipleSelect>
+            <ControlStack sx={{border: 0}}>
+              <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
+                            setValue={setBreed} value={breed}></SingleSelect>
+              <MultipleSelect description={"Select dog characteristics"}
+                              getValues={AiDogService.getCharacteristics}
+                              setValues={setCharacteristics}
+                              values={characteristics}></MultipleSelect>
+            </ControlStack>
           </Box>
           <Box flex={3}>
-            <DogDetailsGrid breedInfo={details}/>
+            {showDetails && <DogDetailsGrid breedInfo={details} />}
           </Box>
-
         </Box>
-        <Button sx={{width: 200, textAlign: 'left'}} variant="contained" onClick={getDetails}>Generate</Button>
+        <Button sx={{width: 200, textAlign: 'left'}} variant="contained"
+                onClick={getDetails}>Generate</Button>
       </ControlStack>
   )
 }

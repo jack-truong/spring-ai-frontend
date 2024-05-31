@@ -35,6 +35,7 @@ const DogDetailsGrid = ({breedInfo}: DogDetailsGridProps) => {
   return <DataGrid
       rows={rows}
       columns={columns}
+      hideFooter
       rowSelection={false}
   />
 }
