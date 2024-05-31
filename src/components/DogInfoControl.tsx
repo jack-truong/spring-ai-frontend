@@ -24,6 +24,7 @@ const DogInfoControl = () => {
       console.log(e);
     });
   }
+
   return (
       <ComponentStack sx={{border: 3}}>
         <h2>{"AI Dog Info Generation\t"}<GiSittingDog/></h2>
