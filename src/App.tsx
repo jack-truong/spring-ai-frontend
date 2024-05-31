@@ -6,7 +6,7 @@ const App = () => {
 
   return (
       <>
-        <Header title={"Dog AI Demo"} />
+        <Header title={"AI Demo"} />
         <ImageControl breed={"Shiba Inu"} />
       </>
   );

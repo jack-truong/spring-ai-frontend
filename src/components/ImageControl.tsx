@@ -19,15 +19,15 @@ const ImageControl = ({breed}: ImageControlProps) => {
         <h2>{"AI Image Generation"}</h2>
         <div>{`Selected breed: ${breed}`}</div>
         <SingleSelectList description={"Select an activity"} getValues={AiService.getActivities}
-                          setValue={setActivity}></SingleSelectList>
+                          setValue={setActivity} value={activity} ></SingleSelectList>
         <SingleSelectList description={"Select a color"} getValues={AiService.getColors}
-                          setValue={setColor}></SingleSelectList>
+                          setValue={setColor} value={color} ></SingleSelectList>
         <SingleSelectList description={"Select an environment"} getValues={AiService.getEnvironments}
-                          setValue={setEnvironment}></SingleSelectList>
+                          setValue={setEnvironment} value={environment} ></SingleSelectList>
         <SingleSelectList description={"Select a food"} getValues={AiService.getFoods}
-                          setValue={setFood}></SingleSelectList>
+                          setValue={setFood} value={food} ></SingleSelectList>
         <SingleSelectList description={"Select an instrument"} getValues={AiService.getInstruments}
-                          setValue={setInstrument}></SingleSelectList>
+                          setValue={setInstrument} value={instrument} ></SingleSelectList>
       </Box>
   )
 }
