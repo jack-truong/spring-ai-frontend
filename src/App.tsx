@@ -1,7 +1,7 @@
 import Header from "./components/Header.tsx";
-import DogInfoControl from "./components/DogInfoControl.tsx";
-import TabsPanel, {TabComponent} from "./components/TabsPanel.tsx";
-import ImageControl from "./components/ImageControl.tsx";
+import DogInfoControl from "./components/dog/DogInfoControl.tsx";
+import TabsPanel, {TabComponent} from "./components/layout/TabsPanel.tsx";
+import ImageControl from "./components/image/ImageControl.tsx";
 import {GiSittingDog} from "react-icons/gi";
 import {BsCardImage} from "react-icons/bs";
 import {VscGraphLine} from "react-icons/vsc";

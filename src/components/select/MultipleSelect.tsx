@@ -1,16 +1,18 @@
 import {useEffect, useState} from "react";
-import {Autocomplete, CircularProgress, Stack, TextField} from "@mui/material";
+import {Autocomplete, Stack} from "@mui/material";
 import {AxiosResponse} from "axios";
 import SelectTextField from "./SelectTextField.tsx";
+import Loading from "../Loading.tsx";
 
 type ListInputProps = {
   description: string;
+  label?: string;
   getValues: () => Promise<AxiosResponse<String[]>>;
   setValues: (value: Array<string>) => void
   values: Array<string>;
 };
 
-const MultipleSelect = ({description, getValues, setValues, values}: ListInputProps) => {
+const MultipleSelect = ({description, label, getValues, setValues, values}: ListInputProps) => {
   const [localValues, setLocalValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
@@ -48,7 +50,7 @@ const MultipleSelect = ({description, getValues, setValues, values}: ListInputPr
             renderInput={(params) => (
                 <SelectTextField params={params} label={description}/>
             )}
-        /> : <CircularProgress/>}
+        /> : <Loading label={label}/>}
       </Stack>
   );
 }

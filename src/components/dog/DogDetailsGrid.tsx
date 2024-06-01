@@ -1,6 +1,6 @@
-import {BreedInfo} from "../services/AiDogService.ts";
+import {BreedInfo} from "../../services/AiDogService.ts";
 import {DataGrid} from "@mui/x-data-grid";
-import {CircularProgress} from "@mui/material";
+import Loading from "../Loading.tsx";
 
 type DogDetailsGridProps = {
   breedInfo: BreedInfo | undefined;
@@ -8,7 +8,7 @@ type DogDetailsGridProps = {
 
 const DogDetailsGrid = ({breedInfo}: DogDetailsGridProps) => {
   if (!breedInfo) {
-    return <CircularProgress/>;
+    return <Loading label={"breed info"}/>;
   }
 
   const columns = [
