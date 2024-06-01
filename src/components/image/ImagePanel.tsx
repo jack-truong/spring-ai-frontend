@@ -1,7 +1,8 @@
 import {useEffect, useState} from "react";
-import AiImageService, {ImageInfo} from "../services/AiImageService.ts";
-import {Box, CircularProgress, TextField} from "@mui/material";
+import AiImageService, {ImageInfo} from "../../services/AiImageService.ts";
+import {Box, TextField} from "@mui/material";
 import {Image} from "mui-image"
+import Loading from "../Loading.tsx";
 
 type ImagePanelProps = {
   prompt: string;
@@ -30,7 +31,7 @@ const ImagePanel = ({prompt}: ImagePanelProps) => {
   }, [prompt]);
 
   return (
-      loading ? <CircularProgress/> :
+      loading ? <Loading label={"generated image"}/> :
 
           <Box sx={{display: "flex", flexDirection: 'row'}}>
             <Box flex={3}>

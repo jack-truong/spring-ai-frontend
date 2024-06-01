@@ -1,12 +1,11 @@
 import {useState} from "react";
-import SingleSelect from "./SingleSelect.tsx";
-import AiDogService, {BreedInfo} from "../services/AiDogService.ts";
-import {GiSittingDog} from "react-icons/gi";
-import MultipleSelect from "./MultipleSelect.tsx";
-import ComponentStack from "./ComponentStack.tsx";
+import SingleSelect from "../select/SingleSelect.tsx";
+import AiDogService, {BreedInfo} from "../../services/AiDogService.ts";
+import MultipleSelect from "../select/MultipleSelect.tsx";
+import ComponentStack from "../layout/ComponentStack.tsx";
 import {Box, Button} from "@mui/material";
 import DogDetailsGrid from "./DogDetailsGrid.tsx";
-import {isArrayEmpty, isEmpty} from "../functions/functions.ts";
+import {isArrayEmpty, isEmpty} from "../../functions/functions.ts";
 
 const DogInfoControl = () => {
   const [randomize, setRandomize] = useState(0);
@@ -34,13 +33,21 @@ const DogInfoControl = () => {
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
             <ComponentStack>
-              <SingleSelect description={"Select a dog breed"} getValues={AiDogService.getBreeds}
-                            selectRandom={true} setValue={setBreed} value={breed}
-                            randomize={randomize}></SingleSelect>
-              <MultipleSelect description={"Select dog characteristics"}
-                              getValues={AiDogService.getCharacteristics}
-                              setValues={setCharacteristics}
-                              values={characteristics}></MultipleSelect>
+              <SingleSelect
+                  description={"Select a dog breed"}
+                  label={"dog breeds"}
+                  getValues={AiDogService.getBreeds}
+                  selectRandom={true}
+                  setValue={setBreed} value={breed}
+                  randomize={randomize}>
+              </SingleSelect>
+              <MultipleSelect
+                  description={"Select dog characteristics"}
+                  label={"dog characteristics"}
+                  getValues={AiDogService.getCharacteristics}
+                  setValues={setCharacteristics}
+                  values={characteristics}>
+              </MultipleSelect>
               <Box>
                 <Button sx={{width: 100, textAlign: 'left', marginRight: 2}}
                         variant="contained"
