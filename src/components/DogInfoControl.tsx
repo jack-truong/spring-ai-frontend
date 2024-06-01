@@ -31,7 +31,6 @@ const DogInfoControl = () => {
 
   return (
       <ComponentStack sx={{border: 3}}>
-        <h2>{"AI Dog Info Generation\t"}<GiSittingDog/></h2>
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
             <ComponentStack>

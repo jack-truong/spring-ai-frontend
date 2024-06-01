@@ -40,7 +40,6 @@ const ImageControl = () => {
 
   return (
       <ComponentStack sx={{border: 3}}>
-        <h2>{"AI Dog Image Generation\t"}<BsCardImage/></h2>
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
             <ComponentStack>
