@@ -32,11 +32,11 @@ const ImagePanel = ({prompt}: ImagePanelProps) => {
   return (
       loading ? <CircularProgress/> :
 
-          <Box sx={{display: "flex", flexDirection: 'column'}}>
-            <Box flex={3} sx={{paddingBottom: 3}}>
-              <Image height={400} width={600} src={imageInfo?.url}/>
+          <Box sx={{display: "flex", flexDirection: 'row'}}>
+            <Box flex={3}>
+              <Image height={600} width={800} src={imageInfo?.url}/>
             </Box>
-            <Box flex={1}>
+            <Box flex={2} alignContent={"center"}>
               <TextField
                   label={"Narrative"}
                   multiline
