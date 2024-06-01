@@ -34,7 +34,7 @@ const ImagePanel = ({prompt}: ImagePanelProps) => {
 
           <Box sx={{display: "flex", flexDirection: 'column'}}>
             <Box flex={3} sx={{paddingBottom: 3}}>
-              <Image height={400} width={400} src={imageInfo?.url}/>
+              <Image height={400} width={600} src={imageInfo?.url}/>
             </Box>
             <Box flex={1}>
               <TextField
