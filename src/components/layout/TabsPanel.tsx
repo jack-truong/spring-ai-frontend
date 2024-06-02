@@ -9,9 +9,10 @@ export type TabComponent = {
 
 type TabPanelProps = {
   tabs: Array<TabComponent>;
+  alwaysRerender?: boolean; // Always rerender tab components when when they are selected
 }
 
-const StyledTabs = styled(Tabs)(({ theme }) => ({
+const StyledTabs = styled(Tabs)(({theme}) => ({
   '& .MuiTab-root': {
     margin: "8px 5px 8px 5px",
     borderRadius: "6px",
@@ -28,28 +29,35 @@ const StyledTabs = styled(Tabs)(({ theme }) => ({
   }
 }));
 
-const TabsPanel = ({ tabs } : TabPanelProps) => {
+const TabsPanel = ({tabs, alwaysRerender}: TabPanelProps) => {
   const [currentTabIndex, setCurrentTabIndex] = useState(0);
 
-  const handleChange = (event, newValue : number) => {
+  const handleChange = (event, newValue: number) => {
     setCurrentTabIndex(newValue);
   };
 
+  const renderedTabs = alwaysRerender ?
+      tabs[currentTabIndex].component :
+      tabs.map(({component}, i) => (
+          <Box sx={{display: currentTabIndex === i ? "block" : "none"}}>
+            {component}
+          </Box>));
+
   return (
-      <Box sx={{ width: "100%" }}>
-        <Box sx={{ paddingBottom: 2, borderColor: "divider" }}>
+      <Box sx={{width: "100%"}}>
+        <Box sx={{paddingBottom: 2, borderColor: "divider"}}>
           <StyledTabs
               value={currentTabIndex}
               onChange={handleChange}
               textColor='primary'
               centered
           >
-            {tabs.map(({ label, icon }, i) => (
+            {tabs.map(({label, icon}, i) => (
                 <Tab label={label} key={i} icon={icon} iconPosition={"end"}></Tab>
             ))}
           </StyledTabs>
         </Box>
-        {tabs[currentTabIndex].component}
+        {renderedTabs}
       </Box>
   );
 }
