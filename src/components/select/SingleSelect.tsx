@@ -10,13 +10,13 @@ type ListInputProps = {
   label? : string;
   getValues: () => Promise<AxiosResponse<String[]>>;
   setValue: (value: string) => void
-  value: string;
   selectRandom? : boolean
   randomize?: number
 };
 
-const SingleSelect = ({description, label, getValues, setValue, value, selectRandom, randomize}: ListInputProps) => {
+const SingleSelect = ({description, label, getValues, setValue, selectRandom, randomize}: ListInputProps) => {
   const [values, setValues] = useState<Array<string>>([]);
+  const [localValue, setLocalValue] = useState<string>("");
 
   const retrieveValues = () => {
     console.log(`### Loading values: ${description}`);
@@ -24,7 +24,7 @@ const SingleSelect = ({description, label, getValues, setValue, value, selectRan
     getValues()
     .then((response: any) => {
       setValues(response.data);
-      setValue(selectRandom ? getRandomElement(response.data) : response.data[0]);
+      updateSelectedValue(selectRandom ? getRandomElement(response.data) : response.data[0]);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -33,9 +33,15 @@ const SingleSelect = ({description, label, getValues, setValue, value, selectRan
   useEffect(() => {
     retrieveValues();
   }, []);
+
+  const updateSelectedValue = (newValue: string) => {
+    setValue(newValue);
+    setLocalValue(newValue)
+  }
+
   useEffect(() => {
     if (!isArrayEmpty(values)) {
-      setValue(getRandomElement(values));
+      updateSelectedValue(getRandomElement(values));
     }
   }, [randomize]);
 
@@ -51,9 +57,9 @@ const SingleSelect = ({description, label, getValues, setValue, value, selectRan
             id="auto-highlight"
             autoHighlight
             onChange={(event, newValue: string) => {
-              setValue(newValue);
+              updateSelectedValue(newValue)
             }}
-            value={value}
+            value={localValue}
             renderInput={(params) => (
                 <SelectTextField params={params} label={description}/>
             )}

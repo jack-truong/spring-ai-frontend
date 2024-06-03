@@ -38,8 +38,8 @@ const TabsPanel = ({tabs, alwaysRerender}: TabPanelProps) => {
 
   const renderedTabs = alwaysRerender ?
       tabs[currentTabIndex].component :
-      tabs.map(({component}, i) => (
-          <Box sx={{display: currentTabIndex === i ? "block" : "none"}}>
+      tabs.map(({component, label}, i) => (
+          <Box sx={{display: currentTabIndex === i ? "block" : "none"}} key={`Tab: ${label}`}>
             {component}
           </Box>));
 

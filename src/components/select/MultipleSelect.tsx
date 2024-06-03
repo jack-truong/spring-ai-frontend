@@ -1,18 +1,18 @@
-import {useEffect, useState} from "react";
+import {ComponentPropsWithoutRef, useEffect, useState} from "react";
 import {Autocomplete, Stack} from "@mui/material";
 import {AxiosResponse} from "axios";
 import SelectTextField from "./SelectTextField.tsx";
 import Loading from "../Loading.tsx";
 
-type ListInputProps = {
+interface ListInputProps extends ComponentPropsWithoutRef<typeof Autocomplete> {
   description: string;
   label?: string;
   getValues: () => Promise<AxiosResponse<String[]>>;
   setValues: (value: Array<string>) => void
   values: Array<string>;
-};
+}
 
-const MultipleSelect = ({description, label, getValues, setValues, values}: ListInputProps) => {
+const MultipleSelect = ({description, label, getValues, setValues, values, ...rest}: ListInputProps) => {
   const [localValues, setLocalValues] = useState<Array<string>>([]);
 
   const retrieveValues = () => {
@@ -34,6 +34,7 @@ const MultipleSelect = ({description, label, getValues, setValues, values}: List
   const defaultProps = {
     options: localValues,
     getOptionLabel: (option: string) => option,
+    ...rest
   };
 
   return (

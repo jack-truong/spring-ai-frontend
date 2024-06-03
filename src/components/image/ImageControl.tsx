@@ -45,7 +45,8 @@ const ImageControl = () => {
               <SingleSelect
                   description={"Select a dog breed"} getValues={AiDogService.getBreeds}
                   label={"dog breeds"}
-                  selectRandom={true} setValue={setBreed} value={breed}
+                  selectRandom={true}
+                  setValue={setBreed}
                   randomize={randomize}>
               </SingleSelect>
               <SingleSelect
@@ -54,7 +55,6 @@ const ImageControl = () => {
                   getValues={AiChatService.getActivities}
                   selectRandom={true}
                   setValue={setActivity}
-                  value={activity}
                   randomize={randomize}>
               </SingleSelect>
               <SingleSelect
@@ -62,7 +62,6 @@ const ImageControl = () => {
                   label={"colors"}
                   getValues={AiChatService.getColors}
                   setValue={setColor}
-                  value={color}
                   randomize={randomize}>
               </SingleSelect>
               <SingleSelect
@@ -71,7 +70,6 @@ const ImageControl = () => {
                   getValues={AiChatService.getEnvironments}
                   selectRandom={true}
                   setValue={setEnvironment}
-                  value={environment}
                   randomize={randomize}>
               </SingleSelect>
               <SingleSelect
@@ -80,7 +78,6 @@ const ImageControl = () => {
                   getValues={AiChatService.getFoods}
                   selectRandom={true}
                   setValue={setFood}
-                  value={food}
                   randomize={randomize}>
               </SingleSelect>
               <SingleSelect
@@ -89,7 +86,6 @@ const ImageControl = () => {
                   getValues={AiChatService.getInstruments}
                   selectRandom={true}
                   setValue={setInstrument}
-                  value={instrument}
                   randomize={randomize}>
               </SingleSelect>
               <Box>
