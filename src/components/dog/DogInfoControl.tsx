@@ -38,16 +38,15 @@ const DogInfoControl = () => {
                   label={"dog breeds"}
                   getValues={AiDogService.getBreeds}
                   selectRandom={true}
-                  setValue={setBreed} value={breed}
-                  randomize={randomize}>
-              </SingleSelect>
+                  setValue={setBreed}
+                  randomize={randomize}
+              />
               <MultipleSelect
                   description={"Select dog characteristics"}
                   label={"dog characteristics"}
                   getValues={AiDogService.getCharacteristics}
                   setValues={setCharacteristics}
-                  values={characteristics}>
-              </MultipleSelect>
+              />
               <Box>
                 <Button sx={{width: 100, textAlign: 'left', marginRight: 2}}
                         variant="contained"
