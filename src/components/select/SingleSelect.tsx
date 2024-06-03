@@ -33,6 +33,7 @@ const SingleSelect = ({description, label, getValues, setValue, value, selectRan
   useEffect(() => {
     retrieveValues();
   }, []);
+
   useEffect(() => {
     if (!isArrayEmpty(values)) {
       setValue(getRandomElement(values));

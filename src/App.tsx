@@ -5,21 +5,22 @@ import ImageControl from "./components/image/ImageControl.tsx";
 import {GiSittingDog} from "react-icons/gi";
 import {BsCardImage} from "react-icons/bs";
 import {VscGraphLine} from "react-icons/vsc";
+import StockControl from "./components/stock/StockControl.tsx";
 
 const App = () => {
   const tabs: Array<TabComponent> = [
+    // {
+    //   component: <DogInfoControl/>,
+    //   icon: <GiSittingDog/>,
+    //   label: "AI Dog Info Generation"
+    // },
+    // {
+    //   component: <ImageControl/>,
+    //   icon: <BsCardImage/>,
+    //   label: "AI Dog Image Generation"
+    // },
     {
-      component: <DogInfoControl/>,
-      icon: <GiSittingDog/>,
-      label: "AI Dog Info Generation"
-    },
-    {
-      component: <ImageControl/>,
-      icon: <BsCardImage/>,
-      label: "AI Dog Image Generation"
-    },
-    {
-      component: <div>Stocks TBD</div>,
+      component: <StockControl/>,
       icon: <VscGraphLine/>,
       label: "AI Stocks"
     }
