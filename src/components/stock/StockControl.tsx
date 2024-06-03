@@ -29,7 +29,6 @@ const StockControl = () => {
     getStocks();
   }, []);
 
-  const enabled: boolean = !isArrayEmpty(stocks);
   const stocksSelector = isArrayEmpty(stocks) ?
       <Loading label={"stocks"} /> :
       <Autocomplete
@@ -41,7 +40,7 @@ const StockControl = () => {
           }
           options={stocks}
           getOptionLabel={(stock) => stock.symbol}
-          defaultValue={[stocks[1]]}
+          defaultValue={[]}
           filterSelectedOptions
           renderInput={(params) => (
             <SelectTextField params={params} label={"Select up to 5 stocks"}/>
@@ -58,12 +57,12 @@ const StockControl = () => {
                 <Button sx={{width: 100, textAlign: 'left', marginRight: 2}}
                         variant="contained"
                         onClick={() => console.log("Generate!")}
-                        disabled={!enabled}
+                        disabled={isArrayEmpty(selectedStocks)}
                 >Generate</Button>
                 <Button sx={{width: 100, textAlign: 'left'}}
                         variant="contained"
                         onClick={() => setRandomize(prev => prev + 1)}
-                        disabled={!enabled}
+                        disabled={isArrayEmpty(stocks)}
                 >Randomize</Button>
               </Box>
             </ComponentStack>
