@@ -6,7 +6,7 @@ export type Stock = {
 };
 
 type StockValue = {
-  name: string;
+  date: string;
   close: number;
 };
 
@@ -19,6 +19,7 @@ export type StockGain = {
   symbol: string;
   stockStart: StockValue;
   stockEnd: StockValue;
+  percentageGain: number;
 };
 
 export type StockRecommendation = {
