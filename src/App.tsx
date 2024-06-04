@@ -9,16 +9,16 @@ import StockControl from "./components/stock/StockControl.tsx";
 
 const App = () => {
   const tabs: Array<TabComponent> = [
-    // {
-    //   component: <DogInfoControl/>,
-    //   icon: <GiSittingDog/>,
-    //   label: "AI Dog Info Generation"
-    // },
-    // {
-    //   component: <ImageControl/>,
-    //   icon: <BsCardImage/>,
-    //   label: "AI Dog Image Generation"
-    // },
+    {
+      component: <DogInfoControl/>,
+      icon: <GiSittingDog/>,
+      label: "AI Dog Info Generation"
+    },
+    {
+      component: <ImageControl/>,
+      icon: <BsCardImage/>,
+      label: "AI Dog Image Generation"
+    },
     {
       component: <StockControl/>,
       icon: <VscGraphLine/>,
