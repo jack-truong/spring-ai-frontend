@@ -103,7 +103,7 @@ const ImageControl = () => {
             </ComponentStack>
           </Box>
           <Box flex={3}>
-            <ImagePanel prompt={imagePrompt}/>
+            {!isEmpty(imagePrompt) && <ImagePanel prompt={imagePrompt}/>}
           </Box>
         </Box>
       </ComponentStack>
