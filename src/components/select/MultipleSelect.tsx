@@ -42,8 +42,9 @@ const MultipleSelect = ({description, label, getValues, setValues}: ListInputPro
         {options.length > 0 ? <Autocomplete
             {...defaultProps}
             multiple
-            id="auto-highlight"
+            id={`${description}-select`}
             autoHighlight
+            filterSelectedOptions
             onChange={(event, newValue: Array<string>) => {
               setValues(newValue);
               setSelected(newValue);

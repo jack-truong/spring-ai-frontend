@@ -10,3 +10,14 @@ export const isArrayEmpty = (values: Array<any>) : boolean => {
 export const getRandomElement = (arr: any[]) => {
   return arr.length ? arr[Math.floor(Math.random() * arr.length)] : undefined
 }
+
+export const getRandomElements = (arr: any[], size: number) => {
+  const random = [];
+  while (random.length < size) {
+    const randomSelection = getRandomElement(arr);
+    if (random.indexOf(randomSelection) == -1) {
+      random.push(randomSelection);
+    }
+  }
+  return random;
+}
