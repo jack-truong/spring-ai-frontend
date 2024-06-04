@@ -19,10 +19,6 @@ const TIMEFRAME_VALUES = [
   {
     value: 90,
     label: "90 days"
-  },
-  {
-    value: 120,
-    label: "120 days"
   }
 ]
 
@@ -54,7 +50,7 @@ const StockControl = () => {
 
   const getHistoricalGains = () => {
     console.log("### Loading historical gains");
-
+    setHistoricalGains(undefined);
     setShowDetails(true);
     const symbols = selectedStocks.map((stock) => stock.symbol);
     AiStockService.getHistoricalGains(symbols, timeframe.value)
