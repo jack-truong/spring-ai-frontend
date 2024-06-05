@@ -18,6 +18,7 @@ export type StockHistorical = {
 export type StockGain = {
   symbol: string;
   stockStart: StockValue;
+  stockMiddle: StockValue;
   stockEnd: StockValue;
   percentageGain: number;
 };
