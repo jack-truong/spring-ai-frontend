@@ -6,7 +6,7 @@ export type ImageInfo = {
   url: string;
 }
 const getImage = (prompt: string) => {
-  return http.get<ImageInfo>("/image",
+  return http.get<ImageInfo>("/image/creation",
       {
         params: {
           prompt: prompt
