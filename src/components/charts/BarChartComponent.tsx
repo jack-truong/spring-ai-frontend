@@ -35,6 +35,7 @@ const BarChartComponent = ({series, xLabels, sx, ...rest}: BarChartProps) => {
             },
             ...(Array.isArray(sx) ? sx : [sx])
           }}
+          barLabel={"value"}
           series={series}
           grid={{
             horizontal: true,
