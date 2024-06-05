@@ -12,6 +12,10 @@ export const getRandomElement = (arr: any[]) => {
 }
 
 export const getRandomElements = (arr: any[], size: number) => {
+  if (arr.length <= size) {
+    return arr;
+  }
+  
   const random = [];
   while (random.length < size) {
     const randomSelection = getRandomElement(arr);
