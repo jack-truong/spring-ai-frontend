@@ -2,6 +2,11 @@
 * This is a POC that demonstrates some of the capabilities of the Spring AI libraries by leveraging a REST API that has been implemented [here](https://github.com/jack-truong/spring-ai).
 * That repository's REST API uses OpenAI as its AI model.
 
+# Running
+* Run `yarn install` to install the latest dependencies.
+* Run `yarn dev` to run a local dev instance.
+* Ensure the backend server is running locally on port `8080`.  Instructions can on running the backend server can be found in that repository's README.
+
 # Layout
 This app is laid out with 4 top-level tabs.  Each of the tabs demonstrates an OpenAI
 capability that has been exposed by the backend REST API.  They will be described below.
