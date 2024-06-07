@@ -4,13 +4,13 @@ import {Box, Button, TextField, Typography} from "@mui/material";
 import FileInput, {IMAGE_TYPES} from "../FileInput.tsx";
 import {isEmpty, toBase64FromFile, toBase64FromUrl} from "../../functions/functions.ts";
 import {Image} from "mui-image"
-import AiImageService, {ImageAnalysisResponse} from "../../services/AiImageService.ts";
+import AiImageService from "../../services/AiImageService.ts";
 import ImageDetailsPanel from "./ImageDetailsPanel.tsx";
 
 const ImageAnalysisControl = () => {
-  const [image, setImage] = useState(undefined);
+  const [image, setImage] = useState("");
   const [prompt, setPrompt] = useState("");
-  const [analysis, setAnalysis] = useState<ImageAnalysisResponse>();
+  const [analysis, setAnalysis] = useState(undefined);
   const [showImage, setShowImage] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
@@ -39,11 +39,11 @@ const ImageAnalysisControl = () => {
   const getImageAnalysis = () => {
     console.log("### Getting image analysis: ", prompt);
     setAnalysis(undefined);
+    setShowDetails(true);
 
     const b64EncodedImage = image.split(',')[1]; // strip out the image type (e.g. data:image/png;base64)
     AiImageService.getImageAnalysis(prompt, b64EncodedImage)
     .then((response: any) => {
-      setShowDetails(true);
       setAnalysis(response.data);
     })
     .catch((e: Error) => {
