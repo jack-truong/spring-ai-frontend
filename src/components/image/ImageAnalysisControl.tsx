@@ -1,21 +1,32 @@
 import {useState} from "react";
 import ComponentStack from "../layout/ComponentStack.tsx";
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, TextField, Typography} from "@mui/material";
 import FileInput, {IMAGE_TYPES} from "../FileInput.tsx";
-import {isEmpty, toBase64} from "../../functions/functions.ts";
+import {isEmpty, toBase64FromFile, toBase64FromUrl} from "../../functions/functions.ts";
 import {Image} from "mui-image"
 import AiImageService, {ImageAnalysisResponse} from "../../services/AiImageService.ts";
 import ImageDetailsPanel from "./ImageDetailsPanel.tsx";
 
 const ImageAnalysisControl = () => {
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(undefined);
   const [prompt, setPrompt] = useState("");
   const [analysis, setAnalysis] = useState<ImageAnalysisResponse>();
   const [showImage, setShowImage] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
 
   const handleFile = (file: File) => {
-    toBase64(file)
+    toBase64FromFile(file)
+    .then((response: any) => {
+      setImage(response);
+      setShowImage(true);
+    })
+    .catch((e: Error) => {
+      console.log(e);
+    });
+  }
+
+  const handleUrl = (url: string) => {
+    toBase64FromUrl(url)
     .then((response: any) => {
       setImage(response);
       setShowImage(true);
@@ -45,11 +56,20 @@ const ImageAnalysisControl = () => {
         <Box sx={{display: "flex"}}>
           <Box flex={1}>
             <ComponentStack>
-              <FileInput
-                  label={"Select an image"}
-                  setFile={handleFile}
-                  inputProps={{accept: IMAGE_TYPES}}
-              />
+              <Box sx={{border: 1, padding: 2}}>
+                <FileInput
+                    label={"Load an image from disk"}
+                    setFile={handleFile}
+                    inputProps={{accept: IMAGE_TYPES}}
+                />
+                <Typography sx={{fontWeight: "bold", margin: 2}} align={"center"}>OR</Typography>
+                <TextField
+                    onChange={(event) => handleUrl(event.target.value)}
+                    variant={"outlined"}
+                    label={"Load an image from a URL"}
+                    fullWidth
+                />
+              </Box>
               <TextField
                   onChange={(event) => setPrompt(event.target.value)}
                   variant={"outlined"}
