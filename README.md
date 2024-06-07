@@ -1,6 +1,6 @@
 # spring-ai
 * This is a POC that demonstrates some of the capabilities of the Spring AI libraries by leveraging a REST API that has been implemented [here](https://github.com/jack-truong/spring-ai).
-* That repository's REST API that uses OpenAI as its AI model.
+* That repository's REST API uses OpenAI as its AI model.
 
 # Layout
 This app is laid out with 4 top-level tabs.  Each of the tabs demonstrates an OpenAI
