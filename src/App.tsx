@@ -7,6 +7,8 @@ import ImageControl from "./components/image/ImageControl.tsx";
 import {BsCardImage} from "react-icons/bs";
 import StockControl from "./components/stock/StockControl.tsx";
 import {VscGraphLine} from "react-icons/vsc";
+import DbControl from "./components/db/DbControl.tsx";
+import {DiDatabase} from "react-icons/di";
 
 const App = () => {
   const tabs: Array<TabComponent> = [
@@ -29,6 +31,11 @@ const App = () => {
       component: <ImageAnalysisControl/>,
       icon: <GiMagnifyingGlass />,
       label: "AI Image Analysis"
+    },
+    {
+      component: <DbControl/>,
+      icon: <DiDatabase />,
+      label: "AI DB Query"
     }
   ]
   return (
