@@ -4,7 +4,7 @@ import {Box, Button, TextField} from "@mui/material";
 import {isEmpty} from "../../functions/functions.ts";
 import {Image} from "mui-image"
 import AiDbService, {DbQueryResponse} from "../../services/AiDbService.ts";
-import { format } from "sql-formatter";
+import DbResultsPanel from "./DbResultsPanel.tsx";
 
 const DbControl = () => {
   const [query, setQuery] = useState("");
@@ -30,11 +30,12 @@ const DbControl = () => {
   const getDbQueryResponse = (query: string) => {
     console.log("### Getting db query response: ", query);
 
+    setDbQueryResponse(undefined);
+    setShowDetails(true);
+
     AiDbService.getDbQueryResponse(query)
     .then((response: any) => {
-      console.log("### Got db query response: ", response.data);
       setDbQueryResponse(response.data);
-      setShowDetails(true);
     })
     .catch((e: Error) => {
       console.log(e);
@@ -66,16 +67,11 @@ const DbControl = () => {
             </ComponentStack>
           </Box>
           <Box flex={4} sx={{display: "flex", flexDirection: 'row', padding: "2"}}>
-            <Box flex={4}>
+            <Box flex={3}>
               {showImage && <Image height={"70%"} fit={"contain"} src={image}/>}
             </Box>
-            <Box flex={5}>
-              {showDetails && <TextField
-                  variant={"outlined"}
-                  label={"Generated Query"}
-                  multiline
-                  value={format(dbQueryResponse?.query ?? "")}
-              />}
+            <Box flex={2}>
+              {showDetails && <DbResultsPanel query={dbQueryResponse?.query} answer={dbQueryResponse?.answer} />}
             </Box>
           </Box>
         </Box>
