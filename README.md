@@ -8,7 +8,7 @@
 * Ensure the backend server is running locally on port `8080`.  Instructions can on running the backend server can be found in that repository's README.
 
 # Layout
-This app is laid out with 4 top-level tabs.  Each of the tabs demonstrates an OpenAI
+This app is laid out with 5 top-level tabs.  Each of the tabs demonstrates an OpenAI
 capability that has been exposed by the backend REST API.  They will be described below.
 
 ![](/documentation/layout.png?raw=true)
@@ -86,7 +86,6 @@ capability that has been exposed by the backend REST API.  They will be describe
     * "What is happening in this picture?"
     * "What foods should I avoid on this menu if I have celiac?"
     * "What is the purpose of the code shown in the picture?"
-  
 
 ![](/documentation/Image_Analysis_Triangles.gif?raw=true)
 
@@ -97,3 +96,20 @@ capability that has been exposed by the backend REST API.  They will be describe
 ![](/documentation/Image_Analysis_Waldo.gif?raw=true)
 
 ![](/documentation/Image_Analysis_Menu.gif?raw=true)
+
+* ## AI DB Analysis
+  This tab provides information about the database hosted by the backend server. 
+
+  Since GPT-4o has no knowledge of the specific database hosted by the backend server, this utilizes the fact that Spring-AI lets you provide functions that can provide this 
+  personalized data as additional context for the AI model to answer questions.  The backend controller provides such a function to call which allows queries to be run against the Northwind database. 
+  This is just a demonstration that the OpenAI model can be given contextual information about the database (its schema) and produce a query that attempts to answer the question passed in.
+
+* This tab calls the REST API to retrieve an image of the database schema.
+* The `ANALYZE` button sends a request to the REST API to answer a question about the database.
+  * Questions like "What is the most popular product and its category?" and "Which customer has the highest total purchases and what did they order the most?" can be asked.
+  * The REST API returns the actual query it used to answer the question asked.
+  * The REST API returns the answer to the question as it can determine based on the query results returned from the database.
+
+![](/documentation/DB_Analysis_1.gif?raw=true)
+
+![](/documentation/DB_Analysis_2.gif?raw=true)
