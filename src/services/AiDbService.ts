@@ -6,7 +6,7 @@ export type DbSchemaImageResponse = {
 
 export type DbQueryResponse = {
   query: string;
-  values: Array<any>;
+  answer: string;
 }
 
 const getDbSchemaImage = () => {
